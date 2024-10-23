@@ -1,0 +1,5 @@
+<section class="countries-grid">
+  @for (country of countries(); track $index) {
+    <country-card [country]="country" />
+  }
+</section>

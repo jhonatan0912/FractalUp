@@ -1,0 +1,13 @@
+.sidebar-item{
+  cursor: pointer;
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: block;
+}
+
+.active{
+  background-color: #fff;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+}

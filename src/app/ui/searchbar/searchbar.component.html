@@ -1,0 +1,18 @@
+<section class="searchbar">
+  <div class="flex flex-col">
+    <span>País</span>
+    <input
+    (click)="showPopover.set(!showPopover())"
+      class="searchbar__input"
+      type="text"
+      (input)="onInputChange($event)"
+      placeholder="Escribe el país que deseas ver"
+    />
+  </div>
+
+  <button class="searchbar__button">🔎 Buscar</button>
+
+  <!-- @if (showPopover()) {
+    <filter-popover [(open)]="showPopover"/>
+  } -->
+</section>

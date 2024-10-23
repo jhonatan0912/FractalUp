@@ -1,0 +1,9 @@
+<aside class="sidebar">
+  <h1 class="sidebar__title">Countries app</h1>
+
+  <section class="sidebar__items" >
+    @for (item of items; track $index) {
+       <sidebar-item [item]="item"/>
+    }
+  </section>
+</aside>

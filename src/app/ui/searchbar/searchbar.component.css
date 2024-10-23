@@ -1,0 +1,36 @@
+:host{
+  padding-bottom: .5rem;
+}
+
+.searchbar{
+  padding-inline: .5rem;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  margin: 2rem auto 0;
+  border-radius: 100px;
+  padding: .5rem 1.5rem;
+  background-color: transparent;
+}
+
+.searchbar__button{
+  padding: .5rem 1rem;
+  background-color: #3697FE;
+  color: white;
+  border-radius: 100px;
+  display: flex;
+  gap: 4px;
+}
+
+.searchbar__input{
+  all:unset;
+}
+
+.searchbar__input:focus{
+  border: none;
+  border-bottom: 1.5px solid #3697FE;
+
+}
