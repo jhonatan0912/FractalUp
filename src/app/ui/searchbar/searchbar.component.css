@@ -25,6 +25,10 @@
   gap: 4px;
 }
 
+.searchbar__button:active{
+  scale: .95;
+}
+
 .searchbar__input{
   all:unset;
 }

@@ -1,9 +1,17 @@
-<aside class="sidebar">
+<aside class="sidebar" [ngClass]="{ opened: opened() }">
+  <div
+    class="sidebar-button"
+    (click)="onToggleStatus()"
+    aria-label="Toggle sidebar"
+  >
+    {{ opened() ? "⛌" : "☰" }}
+  </div>
+
   <h1 class="sidebar__title">Countries app</h1>
 
-  <section class="sidebar__items" >
+  <section class="sidebar__items">
     @for (item of items; track $index) {
-       <sidebar-item [item]="item"/>
+    <sidebar-item [item]="item" />
     }
   </section>
 </aside>

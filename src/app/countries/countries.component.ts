@@ -62,5 +62,8 @@ export class CountriesComponent implements OnInit {
       });
   }
 
+  onFilter(term: string): void {
+    this.countries.set(this.countries().filter(c => c.name.toLowerCase().includes(term.toLowerCase())));
+  }
 
 }
