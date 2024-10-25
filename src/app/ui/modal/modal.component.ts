@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, model, OnInit } from '@angular/core';
+import { Component, model } from '@angular/core';
 
 @Component({
   selector: 'modal',

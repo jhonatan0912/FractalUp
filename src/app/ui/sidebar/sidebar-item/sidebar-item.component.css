@@ -7,7 +7,7 @@
 }
 
 .active{
-  background-color: #0000006b;
+  background-color: #000;
   color: #fff;
   transition: all 0.2s ease-in-out;
 }

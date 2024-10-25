@@ -36,12 +36,13 @@
 
 .close-button {
   position: absolute;
-  top: 10px;
+  top: 0;
   right: 15px;
   background: none;
   border: none;
-  font-size: 1.5em;
+  font-size: 2.5em;
   cursor: pointer;
+  color: gray;
 }
 
 @media (max-width: 768px) {

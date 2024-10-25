@@ -4,10 +4,9 @@ import { capitalizeFirstLetter } from '@app/utils/capitalize-first-letter';
 import { Apollo } from 'apollo-angular';
 import { debounceTime, map } from 'rxjs';
 import { GET_COUNTRIES, GET_COUNTRIES_BY_CONTINENTS } from '../../../graphql.operations';
+import { ModalComponent } from "../ui/modal/modal.component";
 import { SearchbarComponent } from "../ui/searchbar/searchbar.component";
 import { CountriesGridComponent } from './countries-grid/countries-grid.component';
-import { ImagesService } from '@app/services/images.service';
-import { ModalComponent } from "../ui/modal/modal.component";
 
 @Component({
   selector: 'countries',
@@ -34,7 +33,7 @@ export class CountriesComponent implements OnInit {
       .valueChanges
       .pipe(
         debounceTime(300),
-        map(({ data, loading, errors }: any) => {
+        map(({ data, errors }: any) => {
           if (errors) {
             return { countries: [] };
           }

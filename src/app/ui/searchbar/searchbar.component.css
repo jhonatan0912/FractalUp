@@ -28,7 +28,6 @@
 .searchbar__input{
   all:unset;
   border-bottom: 1.5px solid transparent;
-  text-overflow: ellipsis;
 }
 
 .searchbar__input:focus{
@@ -52,6 +51,7 @@
 
   .searchbar__button{
     padding: .5rem 1rem;
+    align-items: center;
     background-color: #3697FE;
     color: white;
     border-radius: 100px;

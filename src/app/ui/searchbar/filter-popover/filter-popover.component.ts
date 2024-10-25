@@ -31,7 +31,7 @@ export class FilterPopoverComponent implements OnInit {
     this.apollo.watchQuery({
       query: GET_CONTINENTS,
     }).valueChanges.subscribe({
-      next: ({ data: { continents }, loading }: any) => {
+      next: ({ data: { continents } }: any) => {
         this.onFormatContinents(continents);
       }
     });

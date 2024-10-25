@@ -4,6 +4,10 @@
   height: 240px;
   width: auto;
   cursor: pointer;
+
+  &:hover{
+    scale: .95;
+  }
 }
 
 .country__card-image-container{
