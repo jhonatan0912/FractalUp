@@ -1,7 +1,19 @@
-<section>
-  <div class="flex justify-between items-center">
+<section (click)="onPrevent($event)">
+  <div class="flex items-center justify-between">
     <h3>Filtrar por continentes</h3>
 
-    <button>Limpiar</button>
+    <button (click)="onClearFilters()">Limpiar</button>
+  </div>
+
+  <div class="continents__grid">
+    @for (continent of continents(); track $index) {
+    <div
+      class="continent"
+      [ngClass]="{ active: isSelectedFilter(continent.code) }"
+      (click)="onSelectFilter(continent.code)"
+    >
+      <h5 class="continent__name">{{ continent.name }}</h5>
+    </div>
+    }
   </div>
 </section>

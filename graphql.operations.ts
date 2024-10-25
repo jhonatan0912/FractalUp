@@ -7,6 +7,18 @@ export const GET_COUNTRIES = gql`
       emojiU
       continent {
         name
+        code
+      }
+    }
+  }
+`;
+
+export const GET_COUNTRIES_BY_CONTINENTS = gql`
+  query getCountriesByCategories($categories: [String!]) {
+    countries(filter: { continent: { in: $categories } }) {
+      name
+      continent {
+        name
       }
     }
   }
@@ -19,10 +31,20 @@ export const GET_COUNTRY = gql`
       currencies
       continent {
         name
+        code
       }
       languages {
         name
       }
+    }
+  }
+`;
+
+export const GET_CONTINENTS = gql`
+  query {
+    continents {
+      name
+      code
     }
   }
 `;

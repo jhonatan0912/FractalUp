@@ -1,18 +1,18 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
+import { Country } from '@app/interfaces/country.interface';
+import { capitalizeFirstLetter } from '@app/utils/capitalize-first-letter';
+import { Apollo } from 'apollo-angular';
+import { debounceTime, map } from 'rxjs';
+import { GET_COUNTRIES, GET_COUNTRIES_BY_CONTINENTS } from '../../../graphql.operations';
 import { SearchbarComponent } from "../ui/searchbar/searchbar.component";
 import { CountriesGridComponent } from './countries-grid/countries-grid.component';
-import { Apollo } from 'apollo-angular';
-import { GET_COUNTRIES } from '../../../graphql.operations';
-import { from, map, switchMap } from 'rxjs';
-import { unsplash } from '@app/utils/unsplash.config';
-import { Country } from '@app/interfaces/country.interface';
 
 @Component({
   selector: 'countries',
   standalone: true,
   templateUrl: './countries.component.html',
   styleUrls: ['./countries.component.css'],
-  imports: [SearchbarComponent, CountriesGridComponent]
+  imports: [ SearchbarComponent, CountriesGridComponent]
 })
 export class CountriesComponent implements OnInit {
 
@@ -27,13 +27,13 @@ export class CountriesComponent implements OnInit {
   onGetCountries(name: string = ""): void {
     this.apollo.watchQuery({
       query: GET_COUNTRIES,
-      variables: { name },
+      variables: { name: capitalizeFirstLetter(name) },
     })
       .valueChanges
       .pipe(
+        debounceTime(300),
         map(({ data, loading, errors }: any) => {
           if (errors) {
-            console.error(errors);
             return { countries: [] };
           }
           return data;
@@ -62,8 +62,15 @@ export class CountriesComponent implements OnInit {
       });
   }
 
-  onFilter(term: string): void {
-    this.countries.set(this.countries().filter(c => c.name.toLowerCase().includes(term.toLowerCase())));
+  onFilterByContinents(continent: string[]): void {
+    this.apollo.watchQuery({
+      query: GET_COUNTRIES_BY_CONTINENTS,
+      variables: { categories: continent }
+    }).valueChanges
+      .subscribe({
+        next: (({ data: { countries } }: any) => {
+          this.countries.set(countries);
+        })
+      });
   }
-
 }

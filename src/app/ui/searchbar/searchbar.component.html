@@ -2,17 +2,21 @@
   <div class="flex flex-col">
     <span>País</span>
     <input
-    (click)="showPopover.set(!showPopover())"
-      class="searchbar__input"
-      type="text"
+      id="searchbar"
+      (click)="showPopover.set(!showPopover())"
       (input)="onInputChange($event)"
+      class="searchbar__input"
       placeholder="Escribe el país que deseas ver"
+      type="text"
     />
   </div>
 
-  <button class="searchbar__button">🔎 Buscar</button>
+  <button class="searchbar__button" [disabled]="term">🔎 Buscar</button>
 
   @if (showPopover()) {
-    <filter-popover [(open)]="showPopover"/>
+  <filter-popover
+    [(open)]="showPopover"
+    (onFilterByContinents)="onFilterByContinents.emit($event)"
+  />
   }
 </section>
