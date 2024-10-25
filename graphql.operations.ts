@@ -14,11 +14,13 @@ export const GET_COUNTRIES = gql`
 `;
 
 export const GET_COUNTRIES_BY_CONTINENTS = gql`
-  query getCountriesByCategories($categories: [String!]) {
-    countries(filter: { continent: { in: $categories } }) {
+  query getCountriesByContinents($continents: [String!]) {
+    countries(filter: { continent: { in: $continents } }) {
+      code
       name
       continent {
         name
+        code
       }
     }
   }

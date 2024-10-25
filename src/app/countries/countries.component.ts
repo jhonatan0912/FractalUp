@@ -19,7 +19,6 @@ import { ModalComponent } from "../ui/modal/modal.component";
 export class CountriesComponent implements OnInit {
 
   private readonly apollo = inject(Apollo);
-  private readonly imagesService = inject(ImagesService);
 
   countries = signal<Country[]>([]);
 
@@ -45,7 +44,6 @@ export class CountriesComponent implements OnInit {
       .subscribe({
         next: (response) => {
           this.countries.set(response.countries);
-          // this.onPushByChunks(response.countries);
         },
         error: (error) => {
           console.error('Error en la consulta:', error);
@@ -53,28 +51,10 @@ export class CountriesComponent implements OnInit {
       });
   }
 
-  onPushByChunks(countries: Country[]): void {
-    const totalCountries = countries.length;
-
-    const pushCountriesWithDelay = (index: number) => {
-      if (index < totalCountries) {
-        const countryChunk = countries.slice(index, index + 20);
-        this.countries.set([...this.countries(), ...countryChunk]);
-
-
-        setTimeout(() => {
-          pushCountriesWithDelay(index + 20);
-        }, 1500);
-      }
-    };
-
-    pushCountriesWithDelay(0);
-  }
-
-  onFilterByContinents(continent: string[]): void {
+  onFilterByContinents(continents: string[]): void {
     this.apollo.watchQuery({
       query: GET_COUNTRIES_BY_CONTINENTS,
-      variables: { categories: continent }
+      variables: { continents: continents }
     }).valueChanges
       .subscribe({
         next: (({ data: { countries } }: any) => {

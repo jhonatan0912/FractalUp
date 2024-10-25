@@ -20,16 +20,26 @@
 
 .continents__grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-top: 1rem;
 }
 
 .continent{
   cursor: pointer;
+    padding: .5rem;
+    background: #8080801c;
+    border-radius: .5rem;
 }
 
 .active{
   border: 1px solid #3697FE;
   border-radius: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .continents__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
 }

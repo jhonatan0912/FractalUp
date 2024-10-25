@@ -1,6 +1,7 @@
 <aside class="sidebar" [ngClass]="{ opened: opened() }">
   <div
     class="sidebar-button"
+    [ngClass]="{ opened: opened() }"
     (click)="onToggleStatus()"
     aria-label="Toggle sidebar"
   >

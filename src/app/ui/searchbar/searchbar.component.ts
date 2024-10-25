@@ -1,7 +1,7 @@
-import { Component, model, OnDestroy, OnInit, output, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, output, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { debounceTime, Subject } from 'rxjs';
 import { FilterPopoverComponent } from "./filter-popover/filter-popover.component";
-import { FormsModule, NgModel } from '@angular/forms';
 @Component({
   selector: 'searchbar',
   standalone: true,

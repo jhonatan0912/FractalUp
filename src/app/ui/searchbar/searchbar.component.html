@@ -12,7 +12,9 @@
     />
   </div>
 
-  <button class="searchbar__button" [disabled]="term">🔎 Buscar</button>
+  <button class="searchbar__button" [disabled]="term">
+    <span class="searchbar__button-icon">🔎</span> Buscar
+  </button>
 
   @if (showPopover()) {
   <filter-popover
