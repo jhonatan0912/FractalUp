@@ -14,6 +14,7 @@ export class SearchbarComponent implements OnInit, OnDestroy {
   searchInput = new Subject<string>();
   term = output<string>();
   onFilterByContinents = output<string[]>();
+  onClearFilters = output<string>();
 
   showPopover = signal<boolean>(false);
 

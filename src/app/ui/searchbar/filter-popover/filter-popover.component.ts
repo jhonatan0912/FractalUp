@@ -18,6 +18,7 @@ export class FilterPopoverComponent implements OnInit {
 
   open = model.required<boolean>();
   onFilterByContinents = output<string[]>();
+  onClearFilters = output<string>();
 
   continents = signal<Continent[]>([]);
   selectedFilters = signal<string[]>([]);
@@ -44,10 +45,6 @@ export class FilterPopoverComponent implements OnInit {
   onSelectFilter(continentCode: string): void {
     this.selectedFilters.update(prev => [...prev, continentCode]);
     this.onFilterByContinents.emit(this.selectedFilters());
-  }
-
-  onClearFilters(): void {
-    this.selectedFilters.set([]);
   }
 
   isSelectedFilter(continentCode: string): boolean {

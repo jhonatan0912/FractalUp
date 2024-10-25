@@ -20,6 +20,7 @@
   <filter-popover
     [(open)]="showPopover"
     (onFilterByContinents)="onFilterByContinents.emit($event)"
+    (onClearFilters)="onClearFilters.emit($event)"
   />
   }
 </section>

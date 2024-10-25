@@ -1,6 +1,9 @@
 <searchbar
   (term)="onGetCountries($event)"
   (onFilterByContinents)="onFilterByContinents($event)"
+  (onClearFilters)="onGetCountries($event)"
 />
 
-<countries-grid [countries]="countries()" />
+@defer () {
+  <countries-grid [countries]="countries()" />
+}
