@@ -1,8 +1,10 @@
 <section (click)="onPrevent($event)">
   <div class="flex items-center justify-between">
-    <h3>Filtrar por continentes</h3>
+    <h3 class="filter__popover-title">Filtrar por continentes</h3>
 
-    <button (click)="onClearFilters()">Limpiar</button>
+    <button class="filter__popover-button" (click)="onClearFilters()">
+      Limpiar
+    </button>
   </div>
 
   <div class="continents__grid">

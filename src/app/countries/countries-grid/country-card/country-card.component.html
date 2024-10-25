@@ -1,6 +1,17 @@
-<article class="country-card">
-  <div class="country-card__info">
-    <h4 class="contry-card__name">{{ country().name }}</h4>
+<article class="country__card" (click)="onSelectCountry.emit(country())">
+  <div class="country__card-info">
+    <div class="country__card-image-container">
+      <img
+        class="country__card-image"
+        [src]="hasError() ? defaultImage : flag"
+        [alt]="country().name"
+        loading="lazy"
+        (error)="onImageError()"
+      />
+    </div>
+    <h4 class="contry-card__name">
+      {{ country().name }}
+    </h4>
     <span>{{ country().continent.name }}</span>
   </div>
 </article>

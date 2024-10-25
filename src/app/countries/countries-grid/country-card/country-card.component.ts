@@ -1,5 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, input, output, signal } from '@angular/core';
 import { Country } from '@app/interfaces/country.interface';
 
 @Component({
@@ -9,19 +8,19 @@ import { Country } from '@app/interfaces/country.interface';
   styleUrls: ['./country-card.component.css']
 })
 
-export class CountryCardComponent implements OnInit {
+export class CountryCardComponent {
 
-  private readonly sanitizer = inject(DomSanitizer);
+  onSelectCountry = output<Country>();
 
   country = input.required<Country>();
-
-  ngOnInit(): void {
-  }
+  hasError = signal<boolean>(false);
+  defaultImage = 'https://ceramicshop.com/cdn/shop/products/default-square_c8f6a682-0bb7-4115-b2d0-719d553bd6af_580x.png?v=1605972874';
 
   get flag(): string {
-    return this.country()?.emojiU
-      .match(/U\+([0-9A-Fa-f]+)/g)
-      ?.map(code => String.fromCodePoint(parseInt(code.replace('U+', ''), 16)))
-      .join('') || '';
+    return `https://flagsapi.com/${this.country().code}/flat/64.png`;
+  }
+
+  onImageError(): void {
+    this.hasError.set(true);
   }
 }

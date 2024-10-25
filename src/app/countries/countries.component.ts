@@ -6,17 +6,20 @@ import { debounceTime, map } from 'rxjs';
 import { GET_COUNTRIES, GET_COUNTRIES_BY_CONTINENTS } from '../../../graphql.operations';
 import { SearchbarComponent } from "../ui/searchbar/searchbar.component";
 import { CountriesGridComponent } from './countries-grid/countries-grid.component';
+import { ImagesService } from '@app/services/images.service';
+import { ModalComponent } from "../ui/modal/modal.component";
 
 @Component({
   selector: 'countries',
   standalone: true,
   templateUrl: './countries.component.html',
   styleUrls: ['./countries.component.css'],
-  imports: [ SearchbarComponent, CountriesGridComponent]
+  imports: [SearchbarComponent, CountriesGridComponent, ModalComponent]
 })
 export class CountriesComponent implements OnInit {
 
   private readonly apollo = inject(Apollo);
+  private readonly imagesService = inject(ImagesService);
 
   countries = signal<Country[]>([]);
 
@@ -38,28 +41,34 @@ export class CountriesComponent implements OnInit {
           }
           return data;
         }),
-        // switchMap(({ countries }) => {
-
-        //   const countryRequests = countries.map((country: Country) => {
-        //     return unsplash.search.getPhotos({ query: country.name })
-        //       .then(res => ({
-        //         ...country,
-        //         image: res.response?.results?.[0]?.urls?.small
-        //       }));
-        //   });
-
-
-        //   return from(Promise.all(countryRequests));
-        // })
       )
       .subscribe({
         next: (response) => {
           this.countries.set(response.countries);
+          // this.onPushByChunks(response.countries);
         },
         error: (error) => {
           console.error('Error en la consulta:', error);
         }
       });
+  }
+
+  onPushByChunks(countries: Country[]): void {
+    const totalCountries = countries.length;
+
+    const pushCountriesWithDelay = (index: number) => {
+      if (index < totalCountries) {
+        const countryChunk = countries.slice(index, index + 20);
+        this.countries.set([...this.countries(), ...countryChunk]);
+
+
+        setTimeout(() => {
+          pushCountriesWithDelay(index + 20);
+        }, 1500);
+      }
+    };
+
+    pushCountriesWithDelay(0);
   }
 
   onFilterByContinents(continent: string[]): void {

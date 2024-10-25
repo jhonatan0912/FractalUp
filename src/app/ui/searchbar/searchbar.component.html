@@ -2,10 +2,11 @@
   <div class="flex flex-col">
     <span>País</span>
     <input
-      id="searchbar"
       (click)="showPopover.set(!showPopover())"
       (input)="onInputChange($event)"
+      autocomplete="off"
       class="searchbar__input"
+      id="searchbar"
       placeholder="Escribe el país que deseas ver"
       type="text"
     />

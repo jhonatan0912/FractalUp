@@ -1,9 +1,23 @@
-.country-card {
+.country__card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 20px;
+  height: 240px;
+  width: auto;
+  cursor: pointer;
 }
 
-.country-card__info{
+.country__card-image-container{
+  width: 100%;
+  height: 100px;
+}
+
+.country__card-image{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.country__card-info{
     display: flex;
     flex-direction: column;
     padding: 16px;

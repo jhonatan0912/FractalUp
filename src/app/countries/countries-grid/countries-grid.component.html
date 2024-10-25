@@ -1,5 +1,39 @@
 <section class="countries-grid">
   @for (country of countries(); track $index) {
-    <country-card [country]="country" />
+  <country-card
+    [country]="country"
+    (onSelectCountry)="onSelectCountry($event)"
+  />
   }
+
+  <modal #modal [(isOpen)]="isModalOpened">
+    <section class="modal__content">
+      @if(!busy()){
+      <div class="w-full h-[200px]">
+        <img
+          class="object-contain w-full h-full"
+          [src]="country()?.image"
+          [alt]="country()?.name"
+        />
+      </div>
+
+      <h3 class="modal__content-name">{{ country()?.name }}</h3>
+
+      <div class="flex flex-col gap-1 mt-2">
+        <p>
+          <span class="modal__item-title">Capital: </span
+          >{{ country()?.capital }}
+        </p>
+        <p>
+          <span class="modal__item-title">Languages: </span
+          >{{ country()?.languages | formatArrayAsString : "name" }}
+        </p>
+        <p>
+          <span class="modal__item-title">Currencies: </span
+          >{{ country()?.currencies | formatArrayAsString : "" }}
+        </p>
+      </div>
+      }@else { loading... }
+    </section>
+  </modal>
 </section>
